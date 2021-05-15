@@ -7,7 +7,7 @@ module.exports.register=function(req,res){
     var today = new Date();
   var encryptedString = cryptr.encrypt(req.body.password);
     var users={
-        "name":req.body.name,
+        "name":req.body.firstName + ' ' + req.body.lastName,
         "email":req.body.email,
         "password":encryptedString,
         "created_at":today,
