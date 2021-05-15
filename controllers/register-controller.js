@@ -2,33 +2,24 @@ var Cryptr = require('cryptr');
 var express=require("express");
 var connection = require('./../config');
 // cryptr = new Cryptr('myTotalySecretKey');
- 
-module.exports.register=function(req,res){
+
+//DB ENTRY
+module.exports.register = function(req,res){
     var today = new Date();
-  var encryptedString = cryptr.encrypt(req.body.password);
+  var encryptedString = cryptr.encrypt(req.body.password1);
     var users={
         "name":req.body.firstName + ' ' + req.body.lastName,
-        "email":req.body.email,
+        "username":req.body.username, 
+        "email":req.body.email1,
         "password":encryptedString,
-        "created_at":today,
-        "updated_at":today
+        "Date_created":today,
+        "city":req.body.city,
+        "Occupation":req.body.job,
+        "income":req.body.income,
+        "Savings":req.body.savings
     }
 
-    // Confirm-Password
-    var password = document.getElementById("password")
-    , confirm_password = document.getElementById("confirm_password");
-
-    function validatePassword(){
-      if(password.value != confirm_password.value) {
-        confirm_password.setCustomValidity("Passwords Don't Match");
-      } else {
-        confirm_password.setCustomValidity('');
-      }
-    }
-
-password.onchange = validatePassword;
-confirm_password.onkeyup = validatePassword;
-
+    
     // Redirect
     connection.query('INSERT INTO users SET ?',users, function (error, results, fields) {
       if (error) {

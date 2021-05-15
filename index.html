@@ -34,7 +34,6 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
-           
             
         }
 
@@ -135,14 +134,29 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4"></label>
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" required>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email1" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="password" class="form-control" id="password" placeholder="Password" required>
+                                <input type="password" class="form-control" id="password" placeholder="Password" name="password1" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password" required>
                             </div>
+                            <script>
+                                var password = document.getElementById("password")
+                                , confirm_password = document.getElementById("confirm_password");
+
+                                function validatePassword(){
+                                if(password.value != confirm_password.value) {
+                                    confirm_password.setCustomValidity("Passwords Don't Match");
+                                } else {
+                                    confirm_password.setCustomValidity('');
+                                }
+                                }
+
+                                password.onchange = validatePassword;
+                                confirm_password.onkeyup = validatePassword;
+                            </script>
                         </div>
                     </div>
                     <!-- Page-2 -->
