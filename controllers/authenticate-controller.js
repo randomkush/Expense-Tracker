@@ -17,7 +17,7 @@ module.exports.authenticate=function(req,res){
   decryptedString = cryptr.decrypt(results[0].password);
             if(password==decryptedString){
               console.log("Login Successful!");
-              return res.redirect('http://www.google.com');
+              return res.redirect('/home');
             }else{
               console.log("Email and Password DO NOT match!");
               return res.redirect('/');
