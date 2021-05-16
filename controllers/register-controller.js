@@ -23,16 +23,11 @@ module.exports.register = function(req,res){
     // Redirect
     connection.query('INSERT INTO users SET ?',users, function (error, results, fields) {
       if (error) {
-        res.json({
-            status:false,
-            message:'there are some error with query'
-        })
+        console.log("Registration Unsuccessful!");
+        return res.redirect('/');
       }else{
-          res.json({
-            status:true,
-            data:results,
-            message:'user registered sucessfully'
-        })
+        console.log("User Registered Succesfully!")
+        return res.redirect('http://www.google.com');
       }
     });
 }
