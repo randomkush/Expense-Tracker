@@ -35,6 +35,14 @@
     * Author: BootstrapMade.com
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+
     <style>
         #tbl {
             margin: auto;
@@ -50,6 +58,9 @@
 
 
 
+
+
+
     <!-- ======= Header ======= -->
     <header id="header" class="d-flex align-items-center">
         <div class="container d-flex align-items-center justify-content-between">
@@ -57,7 +68,6 @@
             <h1 class="logo"><a href="index.html">FINANCEX</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
@@ -82,123 +92,131 @@
                     <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
         </div>
+    </header>
+    <div class="fixed-bottom " style="margin-left: 93%; margin-bottom: 2%;">
+        <button type="button" class="btn btn-primary" style="border-radius: 50%; width: 70px; height: 70px;">+</button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"
+            style="border-radius: 50%; width: 70px; height: 70px;">+</button>
+
+    </div>
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Transaction</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="controllers/register-controller" method="POST">
+                        <!-- Page-1 -->
+                        <div class="tab">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" placeholder="Date" name="date" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="text" class="form-control" placeholder="Time" name="time" required>
+                                </div>
+                            </div>
+
+                        </div>
+
+                       
+                        <!-- Page-2 -->
+                        <div class="tab">
+                            <div class="form-group">
+                                <label for="inputAddress">Amount</label>
+                                <input type="text" class="form-control" id="inputAddress">
+                            </div>
+                            
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="tm">Transaction Mode</label>
+                                    <select id="tm" class="form-control" required>
+                                        <option selected>Choose...</option>
+                                        <option value="PayTM">PayTM</option>
+                                        <option value="GPay">GPay</option>
+                                        <option value="PhonePe">PhonePe</option>
+                                        <option value="BHIM">BHIM</option>
+
+                                    </select>
+                                </div>
+                                
+
+                                <div class="form-group col-md-6">
+                                    <label for="cat">Category</label>
+                                    <select id="cat" class="form-control" required>
+                                        <option selected>Choose...</option>
+                                        <option value="PayTM">PayTM</option>
+                                        <option value="GPay">GPay</option>
+                                        <option value="PhonePe">PhonePe</option>
+                                        <option value="BHIM">BHIM</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                           
+                            
+                            <div class="form-group col-md-6">
+                                <label for="comment">Comments</label><br>
+
+                                <textarea rows="2" cols="60" name="comment" form="usrform">
+                                        Type Here</textarea>
+
+                            </div>
 
 
+                        </div>
+                </div>
+                </form>
 
 
-        <table class="table" id="tbl">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">6</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">7</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">8</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">9</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">10</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">11</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">12</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">12</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Submit</button>
+                </div>
 
 
-        <div class="fixed-bottom " style="margin-left: 93%; margin-bottom: 1%;">
-            <button type="button" class="btn" style="border-radius: 50%;">+</button>
-            <button type="button" class="btn" style="border-radius: 50%;  background-color: #FFC0CB;">+</button>
+            </div>
         </div>
+    </div>
+    </div>
 
 
 
 
 
-        <!-- <div id="piechart" class="chart"></div> -->
 
 
 
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                class="bi bi-arrow-up-short"></i></a>
-        <div id="preloader"></div>
 
-        <!-- Vendor JS Files -->
-        <script src="assets/vendor/aos/aos.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
-        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-        <!-- Template Main JS File -->
-        <script src="assets/js/main.js"></script>
+
+
+    <!-- <div id="piechart" class="chart"></div> -->
+
+
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
 
 </body>
 
