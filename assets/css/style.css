@@ -912,9 +912,7 @@ section {
   padding: 0;
 }
 
-/*--------------------------------------------------------------
-# Pricing
---------------------------------------------------------------*/
+
 .pricing .box {
   padding: 20px;
   background: #f9f9f9;
@@ -922,6 +920,7 @@ section {
   border-radius: 8px;
   position: relative;
   overflow: hidden;
+  
 }
 
 .pricing .box h3 {
