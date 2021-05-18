@@ -12,19 +12,27 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', function (req, res) {  
+
+app.get('/', function (req, res) {     
    res.sendFile( __dirname + "/" + "index.html" );  
 })  
+app.get('/home', isLoggedIn, function (req, res) {
+   res.sendFile( __dirname + '/home.html');
+})
 app.get('/trans', function (req, res) {  
    res.sendFile( __dirname + "/" + "transaction history.html" );  
-})
-app.get('/home', function (req, res) {  
-   res.sendFile( __dirname + "/" + "home.html" );  
 })
 app.get('/bg', function (req, res) {  
    res.sendFile( __dirname + "/" + "images" + "/" + "pranjul.jpg");  
 })
-   
+
+function isLoggedIn(req, res, next) {
+   if(req.isAuthenticated())
+      return next();
+   else
+      res.redirect('/');
+}
+
 console.log(authenticateController);
 app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);
