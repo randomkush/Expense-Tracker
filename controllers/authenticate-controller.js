@@ -12,7 +12,7 @@ module.exports.authenticate=function(req,res){
     connection.query('SELECT * FROM users WHERE email = ?',[email], function (error, results, fields) {
       if (error) {
           console.log("There is some ERROR with Query!");
-          //return res.redirect('/');
+          return res.redirect('/');
       }else{
        
         if(results.length >0){
@@ -23,12 +23,12 @@ module.exports.authenticate=function(req,res){
               return res.redirect('/home');
             }else{
               console.log("Email and Password DO NOT match!");
-              //return res.redirect('/');
+              return res.redirect('/');
             }          
         }
         else{
           console.log("Email does NOT exists!");
-          //return res.redirect('/');
+          return res.redirect('/');
         }
       }
     });
