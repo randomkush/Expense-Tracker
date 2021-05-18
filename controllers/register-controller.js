@@ -9,10 +9,10 @@ module.exports.register = function(req,res){
   var encryptedString = cryptr.encrypt(req.body.password1);
     var users={
         "name":req.body.firstName + ' ' + req.body.lastName,
-        "username":req.body.username, 
         "email":req.body.email1,
         "password":encryptedString,
         "Date_created":today,
+        "address":req.body.add1 + ' ' + req.body.add2,
         "city":req.body.city,
         "Occupation":req.body.job,
         "income":req.body.income,
@@ -27,7 +27,7 @@ module.exports.register = function(req,res){
         return res.redirect('/');
       }else{
         console.log("User Registered Succesfully!")
-        return res.redirect('http://www.google.com');
+        return res.redirect('/home');
       }
     });
 }
