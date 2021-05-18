@@ -966,7 +966,7 @@ section {
 }
 
 .pricing .box ul i {
-  color: #0000FF;
+  color: #FFFFFF;
   font-size: 18px;
   padding-right: 4px;
 }
@@ -999,13 +999,13 @@ section {
 }
 
 .pricing .featured {
-  background: #0000FF;
+  background: #FFFFFF;
   box-shadow: none;
   color: #fff;
 }
 
 .pricing .featured h3, .pricing .featured h4, .pricing .featured ul, .pricing .featured ul li, .pricing .featured ul .na {
-  color: #fff;
+  color: #191919;
 }
 
 .pricing .featured h4 span {
