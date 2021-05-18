@@ -88,7 +88,7 @@
         </div>
     </header>
     <div class="fixed-bottom " style="margin-left: 93%; margin-bottom: 2%;">
-        <button type="button" class="btn btn-primary" style="border-radius: 50%; width: 70px; height: 70px;">+</button>
+        <!-- <button type="button" class="btn btn-primary" style="border-radius: 50%; width: 70px; height: 70px;">+</button> -->
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"
             style="border-radius: 50%; width: 70px; height: 70px;">+</button>
 
@@ -145,10 +145,14 @@
                                     <select id="MoT" class="form-control" name="MoT" required>
                                         <option disabled selected>Choose...</option>
                                         <option value="PayTM">PayTM</option>
+                                        <option value="Debit Card">Debit Card</option>
+                                        <option value="Net Banking">Net Banking</option>
                                         <option value="GPay">GPay</option>
                                         <option value="PhonePe">PhonePe</option>
                                         <option value="BHIM">BHIM</option>
-
+                                        <option value="Cash">Cash</option>
+                                        <option value="Others">Others</option>
+                                        <option id="addCat" value="Add Category" disabled>Add Category</option>
                                     </select>
                                 </div>
                                 
@@ -157,22 +161,22 @@
                                     <label for="cat">Category</label>
                                     <select id="cat" class="form-control" name="cat" required>
                                         <option disabled selected>Choose...</option>
-                                        <option value="PayTM">PayTM</option>
-                                        <option value="GPay">GPay</option>
-                                        <option value="PhonePe">PhonePe</option>
-                                        <option value="BHIM">BHIM</option>
-
+                                        <option value="PayTM">Food</option>
+                                        <option value="GPay">Health</option>
+                                        <option value="PhonePe">Essentials</option>
+                                        <option value="BHIM">Transportation</option>
+                                        <option value="Education">Education</option>
+                                        <option value="Household">Household</option>
+                                        <option value="Others">Others</option>
+                                        <option id="addCat" value="Add Category" disabled>Add Category</option>
                                     </select>
+                                    
                                 </div>
                             </div>
                            
                             <div class="form-group">
                                 <label for="comment">Comments</label>
                                 <input type="text" class="form-control" style="height: 70px;" id="comment" placeholder="Type Here" name="comment">
-                            </div>
-                            <div class="form-group">
-                                <label for="comment">Email</label>
-                                <input type="text" class="form-control" style="height: 70px;" id="comment" placeholder="Type Here" name="email2">
                             </div>
                         </div>
                         <div class="modal-footer">

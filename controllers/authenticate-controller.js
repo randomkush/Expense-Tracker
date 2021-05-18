@@ -1,12 +1,11 @@
 var Cryptr = require('cryptr');
 cryptr = new Cryptr('myTotalySecretKey');
-// var express=require("express");
-// var app = express();
-// var authenticate = false;
   
 var connection = require('./../config');
 module.exports.authenticate=function(req,res){
     var email=req.body.email;
+    exports.email = email;
+    console.log(email);
     var password=req.body.password;
    
     connection.query('SELECT * FROM users WHERE email = ?',[email], function (error, results, fields) {
@@ -21,6 +20,7 @@ module.exports.authenticate=function(req,res){
               console.log("Login Successful!");
               //authenticate = true;
               return res.redirect('/home');
+              
             }else{
               console.log("Email and Password DO NOT match!");
               return res.redirect('/');
