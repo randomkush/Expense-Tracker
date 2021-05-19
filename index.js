@@ -7,6 +7,7 @@ var app = express();
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
 var transactionController=require('./controllers/expense-controller');
+//var expenseTracker=require('./controllers/expenseTracker')
  
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -111,4 +112,5 @@ console.log(authenticateController);
 app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);
 app.post('/controllers/expense-controller', transactionController.register);
+//app.post('/controllers/expenseTracker', expenseTracker)
 app.listen(8080);

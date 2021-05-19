@@ -1,10 +1,13 @@
 var express=require("express");
 var connection = require('./../config');
-var expense = require('./authenticate-controller')
+var expenseLogin = require('./authenticate-controller')
+var expenseReg = require('./register-controller')
 
 //DB ENTRY
 module.exports.register = function(req,res){
-    var emailid = expense.email;
+    var emailid = expenseLogin.email;
+    if(emailid == null)
+      var emailid = expenseReg.email;
     console.log(emailid);
     var transaction={
         "email":emailid,
@@ -23,7 +26,7 @@ module.exports.register = function(req,res){
         return res.redirect('/transactionHistory');
       }else{
         console.log("Data Entry Successful")
-        return res.redirect('/transactionHistory');
+        // return res.redirect('/transactionHistory');
       }
     });
 }

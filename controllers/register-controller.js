@@ -7,9 +7,11 @@ var connection = require('./../config');
 module.exports.register = function(req,res){
     var today = new Date();
   var encryptedString = cryptr.encrypt(req.body.password1);
+  var email = req.body.email1;
+  exports.email = email;
     var users={
         "name":req.body.firstName + ' ' + req.body.lastName,
-        "email":req.body.email1,
+        "email":email,
         "password":encryptedString,
         "Date_created":today,
         "address":req.body.add1 + ' ' + req.body.add2,
