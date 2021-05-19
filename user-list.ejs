@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div class="table-data">
+        <h2>Display Data using Node.js & MySQL</h2>
+        <table border="1">
+            <tr>
+                <th>TID</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Ammount</th>
+                <th>MoT</th>
+                <th>Category</th>
+                <th>Comments</th>
+            </tr>
+            
+            <%
+            if(userData.length!=0){
+            var i=1;
+            userData.forEach(function(data){
+            %>
+            <tr>
+                <td><%=data.transactionID %></td>
+                <td><%=data.Date %></td>
+                <td><%=data.time %></td>
+                <td><%=data.ammount %></td>
+                <td><%=data.mode_of_transaction %></td>
+                <td><%=data.category %></td>
+                <td><%=data.comments %></td>
+            </tr>
+            <%  i++; }) %>
+            <% } else{ %>
+                <tr>
+                    <td colspan="7">No Data Found</td>
+                </tr>
+            <% } %>
+        </table>
+    </div>
+</body>
+</html>

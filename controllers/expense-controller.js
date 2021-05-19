@@ -26,7 +26,7 @@ module.exports.register = function(req,res){
         return res.redirect('/transactionHistory');
       }else{
         console.log("Data Entry Successful")
-        // return res.redirect('/transactionHistory');
+        //return res.redirect('/transactionHistory');
       }
     });
 }
