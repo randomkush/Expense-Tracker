@@ -101,10 +101,10 @@
                         <h3>YOUR GOALS</h3>
 
                         <p><u>Income</u></p>
-                        <h4><sup>₹</sup>0<span> / month</span></h4>
+                        <h4 id="income"></h4>
 
                         <p><u>Amount you want to save</u></p>
-                        <h4><sup>₹</sup>0<span> / month</span></h4>
+                        <h4 id="savings"></h4>
 
                         <p><u>Current Balance</u></p>
                         <h4><sup>₹</sup>0</h4>
@@ -181,6 +181,28 @@
                     </div>
     </footer>
 
+    <script>
+        fetch("/data2").then(
+            res=>{
+                res.json().then(
+                    data=>{
+                        console.log(data); 
+                        if(data.length > 0) {
+                            var temp1 = "";
+                            var temp2 = "";
+    
+                            data.forEach((u)=>{
+                                temp1 += "<sup>₹</sup>"+u.income+"<span> / month</span>"
+                                temp2 += "<sup>₹</sup>"+u.Savings+"<span> / month</span>"
+                            })
+                            document.getElementById("income").innerHTML=temp1;
+                            document.getElementById("savings").innerHTML=temp2;
+                        } 
+                    }
+                ) 
+            }
+        ) 
+      </script>
 
     <!-- Vendor JS Files -->
     <script src="/388"></script>

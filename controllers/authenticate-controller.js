@@ -37,7 +37,17 @@ module.exports.authenticate=function(req,res){
          console.log(error);
       }
       else {
-          app.get('/data', function(req, res) {
+          app.get('/data1', function(req, res) {
+              res.json(results);
+            })
+      }
+    });
+    connection.query('SELECT * FROM users WHERE email = ?',[email], function(error, results, fields){
+      if(error) {
+         console.log(error);
+      }
+      else {
+          app.get('/data2', function(req, res) {
               res.json(results);
             })
       }

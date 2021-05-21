@@ -2,7 +2,7 @@ var express=require("express");
 var connection = require('./../config');
 var expenseLogin = require('./authenticate-controller')
 var expenseReg = require('./register-controller')
-var app = require("./../index");
+
 
 //DB ENTRY
 module.exports.register = function(req,res){
@@ -28,16 +28,6 @@ module.exports.register = function(req,res){
       }else{
         console.log("Data Entry Successful")
         // return res.redirect('/transactionHistory');
-      }
-    });
-    connection.query('SELECT * FROM transaction WHERE email = ?',[emailid], function(error, results, fields){
-      if(error) {
-         console.log(error);
-      }
-      else {
-          app.get('/data', function(req, res) {
-              res.json(results);
-            })
       }
     });
 }

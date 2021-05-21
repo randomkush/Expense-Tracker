@@ -72,7 +72,7 @@
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto" href="#Total">Total</a></li>
-          <li><a class="nav-link scrollto" href="#income">Income</a></li>
+          <li><a class="nav-link scrollto" href="#income" id="income"></a></li>
           <li><a class="nav-link scrollto" href="#expense">Expense</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         
@@ -445,6 +445,26 @@
     <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
   </svg></a>
   <div id="preloader"></div>
+
+  <script>
+    fetch("/data2").then(
+        res=>{
+            res.json().then(
+                data=>{
+                    console.log(data); 
+                    if(data.length > 0) {
+                        var temp = "";
+
+                        data.forEach((u)=>{
+                            temp += "<p>"+"<br>"+"Income:"+"<br>"+u.income+"</p>"
+                        })
+                        document.getElementById("income").innerHTML=temp;
+                    } 
+                }
+            ) 
+        }
+    ) 
+  </script>
 
   <!-- Vendor JS Files -->
   <script src="/388"></script>
