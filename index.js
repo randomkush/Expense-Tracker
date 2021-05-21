@@ -7,6 +7,11 @@ var app = express();
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
 var transactionController=require('./controllers/expense-controller');
+// var expenseTracker=require('./controllers/expenseTracker')
+
+// var emailid = authenticateController.email;
+// if(emailid == null)
+//       var emailid = registerController.email;
  
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -31,6 +36,16 @@ app.get('/savings', function (req, res) {
 app.get('/investments', function (req, res) {     
    res.sendFile( __dirname + "/" + "investment.html" );  
 }) 
+// app.get('/expenseTracker', function(req, res){
+//    console.log('GET request received at /') 
+//    connection.query("SELECT * FROM customers where email = ?",[emailid], function (err, result) {
+//        if (err) throw err;
+//        else{
+//            response.send(result)
+//        }
+//    });
+// });
+
 
 // CSS STYLING
 app.get('/bg', function (req, res) {  
@@ -111,4 +126,5 @@ console.log(authenticateController);
 app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);
 app.post('/controllers/expense-controller', transactionController.register);
+// app.post('/controllers/expenseTracker', expenseTracker)
 app.listen(8080);

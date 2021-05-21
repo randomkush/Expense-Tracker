@@ -82,6 +82,42 @@
         </div>
     </header>
 
+
+    <table class="table table-striped table-sm"  id="myTableData" >
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Transaction</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                            <th>Comments</th>
+                            <th>MoT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $conn=  mysqli_connect("localhost","root","password","dummy");
+                        if ($conn-> connect_error){
+                            die("Connection Failed:".$conn->connect_error);
+                        }
+                        $sql = "SELECT  Trans,amount,cat,comments,MoT from login";
+                        $result = $conn-> query($sql);
+                        if($result-> num_rows>0){
+                            while(($row=$result-> fetch_assoc())){
+                                echo "<tr><td>".$row["Trans"]."<tr><td>".$row["amount"]."<tr><td>".$row["cat"]."<tr><td>".$row["comments"]."<tr><td>".$row["MoT"];
+                            }
+                            echo "</table>";
+
+                        }
+                        else{
+                            echo "0 result";
+                        }
+                        $conn-> close();
+                        ?>
+                       
+                    </tbody>
+    </table>
+
     <div class="fixed-bottom " style="margin-left: 93%; margin-bottom: 2%;">
         <!-- <button type="button" class="btn btn-primary" style="border-radius: 50%; width: 70px; height: 70px;">+</button> -->
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"
