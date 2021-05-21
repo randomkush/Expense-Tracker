@@ -12,11 +12,32 @@ var transactionController=require('./controllers/expense-controller');
 // var emailid = authenticateController.email;
 // if(emailid == null)
 //       var emailid = registerController.email;
+var data;
  
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+connection.query('SELECT * FROM users', function(error, results, fields){
+   if(error) {
+      console.log(error);
+   }
+   data= {
+      headers: ["Name", "Income", "Profession", "City"],
+      rows: new Array(1000).fill(undefined).map(() => {
+         return [
+            results.name,
+            results.income,
+            results.Occupation,
+            results.city,
+         ];
+      })
+   };
+});
+
+app.get('/data', function(req, res){
+   res.json(data);
+});
 // HTML REDIRECTS
 app.get('/', function (req, res) {     
    res.sendFile( __dirname + "/" + "index.html" );  

@@ -100,11 +100,11 @@
                         if ($conn-> connect_error){
                             die("Connection Failed:".$conn->connect_error);
                         }
-                        $sql = "SELECT  Trans,amount,cat,comments,MoT from login";
+                        $sql = "SELECT  transactionID,amount,category,comments,mode_of_transaction from transaction";
                         $result = $conn-> query($sql);
                         if($result-> num_rows>0){
                             while(($row=$result-> fetch_assoc())){
-                                echo "<tr><td>".$row["Trans"]."<tr><td>".$row["amount"]."<tr><td>".$row["cat"]."<tr><td>".$row["comments"]."<tr><td>".$row["MoT"];
+                                echo "<tr><td>".$row["transactionID"]."<tr><td>".$row["amount"]."<tr><td>".$row["category"]."<tr><td>".$row["comments"]."<tr><td>".$row["mode_of_transaction"];
                             }
                             echo "</table>";
 
