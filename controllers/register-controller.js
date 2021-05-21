@@ -32,4 +32,14 @@ module.exports.register = function(req,res){
         return res.redirect('/home');
       }
     });
+    connection.query('SELECT * FROM transaction WHERE email = ?',[email], function(error, results, fields){
+      if(error) {
+         console.log(error);
+      }
+      else {
+          app.get('/data', function(req, res) {
+              res.json(results);
+            })
+      }
+    });
 }

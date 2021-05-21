@@ -175,7 +175,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button style="margin-right: -2.5em;" type="submit" class="btn btn-danger" onclick="handleApiResponse()">Submit</button>
+                            <button style="margin-right: -2.5em;" type="submit" class="btn btn-danger" onclick="Javascript:addRow(), close" >Submit</button>
                         </div>
                     </form>
                 </div>
@@ -183,96 +183,82 @@
         </div>
     </div>
     </div>
+    <div class="container"></div>
+        <table id="myTable" class="table table-stripped" style="margin-top: 10%;">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Ammount Spent</th>
+                    <th>Category</th>
+                    <th>Mode of Transaction</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody id="data">
 
-    
+            </tbody>
+        </table>
+    </div>
 
-    <!-- <div id="dvTable" style="margin-top: 10em;"></div>
+    <script>
+        fetch("/data").then(
+            res=>{
+                res.json().then(
+                    data=>{
+                        console.log(data); 
+                        if(data.length > 0) {
+                            var temp = "";
 
-<script>
-    function GenerateTable() {
-        //Build an array containing Customer records.
-        var customers = new Array();
-        customers.push(["Customer Id", "Name", "Country"]);
-        customers.push([1, "John Hammond", "United      States"]);
-        customers.push([2, "Mudassar Khan", "India"]);
-        customers.push([3, "Suzanne Mathews", "France"]);
-        customers.push([4, "Robert Schidner", "Russia"]);
+                            data.forEach((u)=>{
+                                temp += "<tr>";
+                                temp += "<td>"+"FNNCX2021"+u.transactionID+"</td>";
+                                temp += "<td>"+u.Date+"</td>";
+                                temp += "<td>"+u.time+"</td>";
+                                temp += "<td>"+u.amount+"</td>";
+                                temp += "<td>"+u.category+"</td>";
+                                temp += "<td>"+u.mode_of_transaction+"</td>";
+                                temp += "<td>"+u.comments+"</td>";
+                            })
+                            document.getElementById("data").innerHTML=temp;
 
-        //Create a HTML Table element.
-        var table = document.createElement("TABLE");
-        table.border = "1";
- 
-        //Get the count of columns.
-        var columnCount = customers[0].length;
- 
-        //Add the header row.
-        var row = table.insertRow(-1);
-        for (var i = 0; i < columnCount; i++) {
-            var headerCell = document.createElement("TH");
-            headerCell.innerHTML = customers[0][i];
-            row.appendChild(headerCell);
-        }
- 
-        //Add the data rows.
-        for (var i = 1; i < customers.length; i++) {
-            row = table.insertRow(-1);
-            for (var j = 0; j < columnCount; j++) {
-                var cell = row.insertCell(-1);
-                cell.innerHTML = customers[i][j];
+                        } 
+                    }
+                ) 
             }
-        }
- 
-        var dvTable = document.getElementById("dvTable");
-        dvTable.innerHTML = "";
-        dvTable.appendChild(table);
-    }
-
-    function handleApiResponse() {
-    //$.ajax({
-    //                type: "GET",               
-    //                url: URL,               
-    //                dataType: "jsonp",
-    //                error: function (response) {           
-    //                        alert('Error: There was a problem //processing your request, please refresh the browser and //try again');
-    //                },
-    //                success: function (response) {
-    //                GenerateTable(response)
-    //               }
-    //        });
-    GenerateTable()
-    }
- 
-</script>
-     -->
+        ) 
+    </script>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><svg xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
       </svg></a>
     <div id="preloader"></div>
 
-    <!-- <script>
+    <script>
         function addRow() {
-
-            var transaction = document.getElementById("date");
+            
+            var date = document.getElementById("date");
+            var time = document.getElementById("time");
             var amount = document.getElementById("expense");
             var category = document.getElementById("cat");
             var comments = document.getElementById("comment");
             var MoT= document.getElementById("MoT");
-            var table = document.getElementById("myTableData");
+            var table = document.getElementById("myTable");
 
             var rowCount = table.rows.length;
             var row = table.insertRow(rowCount);
 
-            row.insertCell(0).innerHTML = rowCount.value;
-            row.insertCell(1).innerHTML = transaction.value;
-            row.insertCell(2).innerHTML = amount.value;
-            row.insertCell(3).innerHTML = category.value;
-            row.insertCell(4).innerHTML = comments.value;
+            row.insertCell(0).innerHTML = "ERROR PLEASE REFRESH";
+            row.insertCell(1).innerHTML = date.value;
+            row.insertCell(2).innerHTML = time.value;
+            row.insertCell(3).innerHTML = amount.value;
+            row.insertCell(4).innerHTML = category.value;
             row.insertCell(5).innerHTML = MoT.value;
-
+            row.insertCell(6).innerHTML = comments.value;
         }
 
-    </script> -->
+    </script>
 
     <!-- Vendor JS Files -->
     <script src="/388"></script>

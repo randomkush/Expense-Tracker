@@ -1,5 +1,7 @@
+var express=require("express");
 var Cryptr = require('cryptr');
 cryptr = new Cryptr('myTotalySecretKey');
+var app = require("./../index");
   
 var connection = require('./../config');
 module.exports.authenticate=function(req,res){
@@ -17,7 +19,6 @@ module.exports.authenticate=function(req,res){
   decryptedString = cryptr.decrypt(results[0].password);
             if(password==decryptedString){
               console.log("Login Successful!");
-              //authenticate = true;
               return res.redirect('/home');
               
             }else{
@@ -31,19 +32,14 @@ module.exports.authenticate=function(req,res){
         }
       }
     });
-
-    // app.get('/home', function (req, res) {
-    //   if(authenticate === true) {
-    //     console.log("Login Successful!");
-    //     res.sendFile( __dirname + "/" + "home.html" );
-    //     return res.redirect('/home');  
-    //   } else {
-    //     res.redirect('/');
-    //   }
-        // if(authenticate === true) {
-      //   res.redirect('/home');
-      // }
-      // else
-      //   res.redirect('/');
-    // }) 
+    connection.query('SELECT * FROM transaction WHERE email = ?',[email], function(error, results, fields){
+      if(error) {
+         console.log(error);
+      }
+      else {
+          app.get('/data', function(req, res) {
+              res.json(results);
+            })
+      }
+    });
 }

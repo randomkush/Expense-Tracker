@@ -1,43 +1,17 @@
-var express=require("express");
+var express=require("express")
 var bodyParser=require('body-parser');
  
 var connection = require('./config');
-var app = express();
+var app = module.exports = express();
  
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
 var transactionController=require('./controllers/expense-controller');
-// var expenseTracker=require('./controllers/expenseTracker')
 
-// var emailid = authenticateController.email;
-// if(emailid == null)
-//       var emailid = registerController.email;
-var data;
- 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-connection.query('SELECT * FROM users', function(error, results, fields){
-   if(error) {
-      console.log(error);
-   }
-   data= {
-      headers: ["Name", "Income", "Profession", "City"],
-      rows: new Array(1000).fill(undefined).map(() => {
-         return [
-            results.name,
-            results.income,
-            results.Occupation,
-            results.city,
-         ];
-      })
-   };
-});
-
-app.get('/data', function(req, res){
-   res.json(data);
-});
 // HTML REDIRECTS
 app.get('/', function (req, res) {     
    res.sendFile( __dirname + "/" + "index.html" );  
@@ -57,20 +31,22 @@ app.get('/savings', function (req, res) {
 app.get('/investments', function (req, res) {     
    res.sendFile( __dirname + "/" + "investment.html" );  
 }) 
-// app.get('/expenseTracker', function(req, res){
-//    console.log('GET request received at /') 
-//    connection.query("SELECT * FROM customers where email = ?",[emailid], function (err, result) {
-//        if (err) throw err;
-//        else{
-//            response.send(result)
-//        }
-//    });
-// });
-
+app.get('/expenseTracker', function(req, res){
+   res.sendFile(__dirname + '/controllers' + '/tracking-controller.js')
+});
 
 // CSS STYLING
-app.get('/bg', function (req, res) {  
-   res.sendFile( __dirname + "/" + "images" + "/" + "pranjul.jpg");  
+app.get('/bg1', function (req, res) {  
+   res.sendFile( __dirname + "/images" + "/pranjul.jpg");  
+})
+app.get('/alert', function(req, res){
+   res.sendFile(__dirname + '/images' + '/alert 2.jpeg')
+})
+app.get('/bg2', function(req, res){
+   res.sendFile(__dirname + '/images' + '/savings.jpeg')
+})
+app.get('/bg3', function(req, res){
+   res.sendFile(__dirname + '/images' + '/investment.jpg')
 })
 app.get('/13-14', function (req, res) {     
    res.sendFile( __dirname + "/" + "assets/img/logo.png" );  
@@ -147,5 +123,4 @@ console.log(authenticateController);
 app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);
 app.post('/controllers/expense-controller', transactionController.register);
-// app.post('/controllers/expenseTracker', expenseTracker)
 app.listen(8080);
