@@ -7,7 +7,7 @@
   <a href=""></a>
   
 ## Presentation Link:
-  <a href=""> Our ppt </a>
+  <a href="https://docs.google.com/presentation/d/1T7hv0VhODB_YSpnSbcoQhOGZrjRmEENOtAg-nMXIjR0/edit?usp=sharing"> Our ppt </a>
   
 ## Contributors:
 
