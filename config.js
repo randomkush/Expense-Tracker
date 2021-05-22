@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
   port     : '8012',
   user     : 'root',
   password : 'password',
-  database : 'dummy'
+  database : 'financex'
 });
 
 connection.connect(function(err) {
