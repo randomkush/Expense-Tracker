@@ -18,28 +18,183 @@
       justify-content: center;
       align-items: left;
     }
+    body {
+      background: url();
+    }
   </style>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-    google.charts.load("current", { packages: ["corechart"] });
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['Work', 11],
-        ['Eat', 2],
-        ['Commute', 2],
-        ['Watch TV', 2],
-        ['Sleep', 7]
-      ]);
+        var food = 0;
+        var health = 0;
+        var essen = 0;
+        var transport = 0;
+        var edu = 0;
+        var hhold = 0;
+        var others = 0;
+        fetch("/food").then(
+          res=>{
+            res.json().then(
+              data=>{
+                console.log(data);
+                if(data.length > 0) {
+                    var temp1 ="";
 
-      var options = {
-        title: 'My Daily Activities',
-        is3D: true,
-      };
+                    data.forEach((u)=>{
+                        food += u.amount;
+                    })
+                    temp1 += "<tr>"
+                    temp1 += "<td>"+"Food"+"</td>"
+                    temp1 += "<td>"+food+"</td>"
+                    document.getElementById("data1").innerHTML=temp1;
+                }
+              }
+            )
+          }
+        )
+        fetch("/health").then(
+          res=>{
+            res.json().then(
+              data=>{
+                console.log(data);
+                if(data.length > 0) {
+                    var temp2 ="";
 
-      var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-      chart.draw(data, options);
+                    data.forEach((u)=>{
+                        health += u.amount;
+                    })
+                    temp2 += "<tr>"
+                    temp2 += "<td>"+"Health"+"</td>"
+                    temp2 += "<td>"+health+"</td>"
+                    document.getElementById("data2").innerHTML=temp2;
+                }
+              }
+            )
+          }
+        )
+        fetch("/essen").then(
+          res=>{
+            res.json().then(
+              data=>{
+                console.log(data);
+                if(data.length > 0) {
+                    var temp3 ="";
+
+                    data.forEach((u)=>{
+                        essen += u.amount;
+                    })
+                    temp3 += "<tr>"
+                    temp3 += "<td>"+"Essentials"+"</td>"
+                    temp3 += "<td>"+essen+"</td>"
+                    document.getElementById("data3").innerHTML=temp3;
+                }
+              }
+            )
+          }
+        )
+        fetch("/transport").then(
+          res=>{
+            res.json().then(
+              data=>{
+                console.log(data);
+                if(data.length > 0) {
+                    var temp4 ="";
+
+                    data.forEach((u)=>{
+                        transport += u.amount;
+                    })
+                    temp4 += "<tr>"
+                    temp4 += "<td>"+"Transportation"+"</td>"
+                    temp4 += "<td>"+transport+"</td>"
+                    document.getElementById("data4").innerHTML=temp4;
+                }
+              }
+            )
+          }
+        )
+        fetch("/edu").then(
+          res=>{
+            res.json().then(
+              data=>{
+                console.log(data);
+                if(data.length > 0) {
+                    var temp5 ="";
+ 
+                    data.forEach((u)=>{
+                        edu += u.amount;
+                    })
+                    temp5 += "<tr>"
+                    temp5 += "<td>"+"Education"+"</td>"
+                    temp5 += "<td>"+edu+"</td>"
+                    document.getElementById("data5").innerHTML=temp5;
+                }
+              }
+            )
+          }
+        )
+        fetch("/hhold").then(
+          res=>{
+            res.json().then(
+              data=>{
+                console.log(data);
+                if(data.length > 0) {
+                    var temp6 ="";
+
+                    data.forEach((u)=>{
+                        hhold += u.amount;
+                    })
+                    temp6 += "<tr>"
+                    temp6 += "<td>"+"Household"+"</td>"
+                    temp6 += "<td>"+hhold+"</td>"
+                    document.getElementById("data6").innerHTML=temp6;
+                }
+              }
+            )
+          }
+        )
+        fetch("/others").then(
+          res=>{
+            res.json().then(
+              data=>{
+                console.log(data);
+                if(data.length > 0) {
+                    var temp7 ="";
+
+                    data.forEach((u)=>{
+                        others += u.amount;
+                    })
+                    temp7 += "<tr>"
+                    temp7 += "<td>"+"Others"+"</td>"
+                    temp7 += "<td>"+others+"</td>"
+                    document.getElementById("data7").innerHTML=temp7;
+                }
+              }
+            )
+          }
+        )
+    window.onload = function() {
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      title: {
+        text: "Mothly Expenditure: Category Wise"
+      },
+      data: [{
+        type: "pie",
+        startAngle: 240,
+        yValueFormatString: "##0.00\"₹\"",
+        indexLabel: "{label} {y}",
+        dataPoints: [
+          {y: food, label: "Food"},
+          {y: health, label: "Health"},
+          {y: essen, label: "Essentials"},
+          {y: transport, label: "Transportation"},
+          {y: edu, label: "Education"},
+          {y: hhold, label: "Household"},
+          {y: others, label: "Others"}
+        ]
+      }]
+    });
+    chart.render();
+
     }
   </script>
 
@@ -83,10 +238,10 @@
           <li><a class="nav-link scrollto active" href="/home">Home</a></li>
           <li><a class="nav-link scrollto" href="/home">About</a></li>
 
-          <li><a class="nav-link scrollto" href="#Total">Total</a></li>
-          <li><a class="nav-link scrollto" href="#income">Income</a></li>
-          <li><a class="nav-link scrollto" href="#expense">Expense</a></li>
-          <li><a class="nav-link scrollto" href="/home">Contact</a></li>
+          <li><a class="nav-link scrollto" href="#Total" id="total"></a></li>
+          <li><a class="nav-link scrollto" href="#income" id="income"></a></li>
+          <li><a class="nav-link scrollto" href="#expense" id="expense"></a></li>
+          <li><a class="nav-link scrollto" href="/home"></a></li>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
               data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,110 +263,23 @@
   </header>
 
 
-  <div id="piechart_3d" style="width: 1500px; height: 700px; justify-content: center; margin: auto auto;"></div>
+  <div id="chartContainer" style="width: 1500px; height: 700px; justify-content: center; margin-left: -2.5em; margin-top: 5em;"></div>
   <div>
-    <table class="table table-striped table-dark"
-      style="height: 500px; width: 450px; float: right; align-items:center;position: absolute; margin-left: 70%; margin-top: -600px; margin-right: 500px; ">
+    <table id="Table" class="table table-striped table-dark"
+      style="height: 250px; width: 300px; float: right; align-items:center;position: absolute; margin-left: 75%; margin-top: -550px;">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
+          <th scope="col">Category</th>
+          <th scope="col">Ammount Spent</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">5</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">6</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">7</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">8</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">9</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">10</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">11</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">12</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">13</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">14</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-        <tr>
-          <th scope="row">15</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
+      <tbody id="data1"></tbody>
+      <tbody id="data2"></tbody>
+      <tbody id="data3"></tbody>
+      <tbody id="data4"></tbody>
+      <tbody id="data5"></tbody>
+      <tbody id="data6"></tbody>
+      <tbody id="data7"></tbody>
     </table>
   </div>
 
@@ -295,6 +363,7 @@
   <script src="/391"></script>
   <script src="/392"></script>
   <script src="/393"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="/396"></script>
