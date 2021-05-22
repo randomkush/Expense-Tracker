@@ -53,9 +53,9 @@
                     <li><a class="nav-link scrollto active" href="/home">Home</a></li>
                     <li><a class="nav-link scrollto" href="/home">About</a></li>
 
-                    <li><a class="nav-link scrollto" href="#Total">Total</a></li>
-                    <li><a class="nav-link scrollto" href="#income">Income</a></li>
-                    <li><a class="nav-link scrollto" href="#expense">Expense</a></li>
+                    <li><a class="nav-link scrollto" href="#Total" id="total"></a></li>
+                    <li><a class="nav-link scrollto" href="#income" id="income"></a></li>
+                    <li><a class="nav-link scrollto" href="#expense" id="expense"></a></li>
                     <li><a class="nav-link scrollto" href="/home">Contact</a></li>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -101,13 +101,13 @@
                         <h3>YOUR GOALS</h3>
 
                         <p><u>Income</u></p>
-                        <h4 id="income"></h4>
+                        <h4 id="savincome"></h4>
 
                         <p><u>Amount you want to save</u></p>
-                        <h4 id="savings"></h4>
+                        <h4 id="savsavings"></h4>
 
                         <p><u>Current Balance</u></p>
-                        <h4><sup>₹</sup>0</h4>
+                        <h4 id="savtotal"></h4>
 
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                     <div class="box featured">
                         <h3>Notifications</h3>
                         <br>
-                        <button onclick="document.getElementById('myImage', 'alert').style.display='block';">Show
+                        <button onclick="Javascript:bassi()">Show
                             notifications</button>
 
                         <br>
@@ -137,12 +137,12 @@
                         <h3>YOUR CURRENT SAVINGS</h3>
                         <br>
                         <p><u>Total Expense</u></p>
-                        <h4><sup>₹</sup>0<span> / month</span></h4>
+                        <h4 id="savexpense"></h4>
 
                         <br>
                         <br>
                         <p><u>Amount saved</u></p>
-                        <h4><sup>₹</sup>0<span> / month</span></h4>
+                        <h4 id="savcurr">></h4>
 
                         <br>
                         <br>
@@ -182,6 +182,74 @@
     </footer>
 
     <script>
+        // Navbar Shit
+        var savings = 0;
+        var income = "";
+        var expense = 0;
+        var intIncome = 0;
+        var total = 0;
+        fetch("/data2").then(
+            res=>{
+                res.json().then(
+                    data=>{
+                        console.log(data); 
+                        if(data.length > 0) {
+
+                            data.forEach((u)=>{
+                                intIncome += u.income;
+                                income += "<p>"+"<br>"+"Income:"+"<br>"+u.income+"</p>";
+                                savings += u.Savings;
+                            })
+                            document.getElementById("income").innerHTML=income;
+                        } 
+                    }
+                ) 
+            }
+        ) 
+        fetch("/data1").then(
+            res=>{
+                res.json().then(
+                    data=>{
+                        console.log(data); 
+                        if(data.length > 0) {
+                            var temp2 = "";
+
+                            data.forEach((u)=>{
+                                expense += u.amount;
+                            })
+                            temp2 = "<p>"+"<br>"+"Expense:"+"<br>"+expense+"</p>"
+                            document.getElementById("expense").innerHTML=temp2;
+                            total = intIncome - expense - savings;
+                            var temp1 = "<p>"+"<br>"+"Total:"+"<br>"+total+"</p>";
+                            document.getElementById("total").innerHTML=temp1;
+                        } 
+                    }
+                ) 
+            }
+        )
+        fetch("/data").then(
+            res=>{
+                res.json().then(
+                    data=>{
+                        console.log(data); 
+                        if(data.length > 0) {
+                            var temp2 = "";
+                            expense = 0;
+
+                            data.forEach((u)=>{
+                                expense += u.amount;
+                            })
+                            temp2 = "<p>"+"<br>"+"Expense:"+"<br>"+expense+"</p>"
+                            document.getElementById("expense").innerHTML=temp2;
+                            total = intIncome - expense - savings;
+                            var temp1 = "<p>"+"<br>"+"Total:"+"<br>"+total+"</p>";
+                            document.getElementById("total").innerHTML=temp1;
+                        } 
+                    }
+                ) 
+            }
+        )
+        // Main Page Shit
         fetch("/data2").then(
             res=>{
                 res.json().then(
@@ -192,16 +260,31 @@
                             var temp2 = "";
     
                             data.forEach((u)=>{
-                                temp1 += "<sup>₹</sup>"+u.income+"<span> / month</span>"
-                                temp2 += "<sup>₹</sup>"+u.Savings+"<span> / month</span>"
+                                temp1 += "<sup>₹</sup>"+u.income+"<span> / month</span>";
+                                temp2 += "<sup>₹</sup>"+u.Savings+"<span> / month</span>";
                             })
-                            document.getElementById("income").innerHTML=temp1;
-                            document.getElementById("savings").innerHTML=temp2;
+                            var temp3 = "<sup>₹</sup>"+total;
+                            var temp4 = "<sup>₹</sup>"+expense+"<span> / month</span>";
+                            var temp5 = "<sup>₹</sup>"+total+"<span> / month</span>";
+                            document.getElementById("savincome").innerHTML=temp1;
+                            document.getElementById("savsavings").innerHTML=temp2;
+                            document.getElementById("savtotal").innerHTML=temp3;
+                            document.getElementById("savexpense").innerHTML=temp4;
+                            document.getElementById("savcurr").innerHTML=temp5;
                         } 
                     }
                 ) 
             }
         ) 
+
+        // Alert Shit
+        function bassi() {
+            if(total<savings)
+                document.getElementById('myImage', 'alert').style.display='block';
+             }
+        // Alert Pop-Up
+        if(total<savings)
+            alert("Check Notifications");
       </script>
 
     <!-- Vendor JS Files -->

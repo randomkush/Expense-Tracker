@@ -75,7 +75,7 @@
       <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-      <h1 class="logo"><a href="index.html">FINANCEX</a></h1>
+      <h1 class="logo"><a href="/home">FINANCEX</a></h1>
      
 
       <nav id="navbar" class="navbar">
@@ -218,6 +218,75 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
+
+    <script>
+      // Navbar Shit
+      var savings = 0;
+      var income = "";
+      var intIncome = 0;
+      fetch("/data2").then(
+          res=>{
+              res.json().then(
+                  data=>{
+                      console.log(data); 
+                      if(data.length > 0) {
+
+                          data.forEach((u)=>{
+                              intIncome += u.income;
+                              income += "<p>"+"<br>"+"Income:"+"<br>"+u.income+"</p>";
+                              savings += u.Savings;
+                          })
+                          document.getElementById("income").innerHTML=income;
+                      } 
+                  }
+              ) 
+          }
+      ) 
+      fetch("/data1").then(
+          res=>{
+              res.json().then(
+                  data=>{
+                      console.log(data); 
+                      if(data.length > 0) {
+                          var temp1 = 0;
+                          var temp2 = "";
+
+                          data.forEach((u)=>{
+                              temp1 += u.amount;
+                          })
+                          temp2 = "<p>"+"<br>"+"Expense:"+"<br>"+temp1+"</p>"
+                          document.getElementById("expense").innerHTML=temp2;
+                          var temp3 = intIncome - temp1 - savings;
+                          var total = "<p>"+"<br>"+"Total:"+"<br>"+temp3+"</p>";
+                          document.getElementById("total").innerHTML=total;
+                      } 
+                  }
+              ) 
+          }
+      )
+      fetch("/data").then(
+          res=>{
+              res.json().then(
+                  data=>{
+                      console.log(data); 
+                      if(data.length > 0) {
+                          var temp1 = 0;
+                          var temp2 = "";
+
+                          data.forEach((u)=>{
+                              temp1 += u.amount;
+                          })
+                          temp2 = "<p>"+"<br>"+"Expense:"+"<br>"+temp1+"</p>"
+                          document.getElementById("expense").innerHTML=temp2;
+                          var temp3 = intIncome - temp1 - savings;
+                          var total = "<p>"+"<br>"+"Total:"+"<br>"+temp3+"</p>";
+                          document.getElementById("total").innerHTML=total;
+                      } 
+                  }
+              ) 
+          }
+      )
+    </script>
 
   <!-- Vendor JS Files -->
   <script src="/388"></script>

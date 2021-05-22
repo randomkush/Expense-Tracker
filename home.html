@@ -71,9 +71,9 @@
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#Total">Total</a></li>
+          <li><a class="nav-link scrollto" href="#Total" id="total"></a></li>
           <li><a class="nav-link scrollto" href="#income" id="income"></a></li>
-          <li><a class="nav-link scrollto" href="#expense">Expense</a></li>
+          <li><a class="nav-link scrollto" href="#expense" id="expense"></a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -447,23 +447,71 @@
   <div id="preloader"></div>
 
   <script>
+    var savings = 0;
+    var income = "";
+    var intIncome = 0;
     fetch("/data2").then(
         res=>{
             res.json().then(
                 data=>{
                     console.log(data); 
                     if(data.length > 0) {
-                        var temp = "";
 
                         data.forEach((u)=>{
-                            temp += "<p>"+"<br>"+"Income:"+"<br>"+u.income+"</p>"
+                            intIncome += u.income;
+                            income += "<p>"+"<br>"+"Income:"+"<br>"+u.income+"</p>";
+                            savings += u.Savings;
                         })
-                        document.getElementById("income").innerHTML=temp;
+                        document.getElementById("income").innerHTML=income;
                     } 
                 }
             ) 
         }
     ) 
+    fetch("/data1").then(
+        res=>{
+            res.json().then(
+                data=>{
+                    console.log(data); 
+                    if(data.length > 0) {
+                        var temp1 = 0;
+                        var temp2 = "";
+
+                        data.forEach((u)=>{
+                            temp1 += u.amount;
+                        })
+                        temp2 = "<p>"+"<br>"+"Expense:"+"<br>"+temp1+"</p>"
+                        document.getElementById("expense").innerHTML=temp2;
+                        var temp3 = intIncome - temp1 - savings;
+                        var total = "<p>"+"<br>"+"Total:"+"<br>"+temp3+"</p>";
+                        document.getElementById("total").innerHTML=total;
+                    } 
+                }
+            ) 
+        }
+    )
+    fetch("/data").then(
+        res=>{
+            res.json().then(
+                data=>{
+                    console.log(data); 
+                    if(data.length > 0) {
+                        var temp1 = 0;
+                        var temp2 = "";
+
+                        data.forEach((u)=>{
+                            temp1 += u.amount;
+                        })
+                        temp2 = "<p>"+"<br>"+"Expense:"+"<br>"+temp1+"</p>"
+                        document.getElementById("expense").innerHTML=temp2;
+                        var temp3 = intIncome - temp1 - savings;
+                        var total = "<p>"+"<br>"+"Total:"+"<br>"+temp3+"</p>";
+                        document.getElementById("total").innerHTML=total;
+                    } 
+                }
+            ) 
+        }
+    )
   </script>
 
   <!-- Vendor JS Files -->

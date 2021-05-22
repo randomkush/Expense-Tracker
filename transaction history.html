@@ -60,9 +60,9 @@
                     <li><a class="nav-link scrollto active" href="/home">Home</a></li>
                     <li><a class="nav-link scrollto" href="/home">About</a></li>
 
-                    <li><a class="nav-link scrollto" href="#Total">Total</a></li>
-                    <li><a class="nav-link scrollto" href="#income">Income</a></li>
-                    <li><a class="nav-link scrollto" href="#expense">Expense</a></li>
+                    <li><a class="nav-link scrollto" href="#Total" id="total"></a></li>
+                    <li><a class="nav-link scrollto" href="#income" id="income"></a></li>
+                    <li><a class="nav-link scrollto" href="#expense" id="expense"></a></li>
                     <li><a class="nav-link scrollto" href="/home">Contact</a></li>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -156,10 +156,10 @@
                                     <label for="cat">Category</label>
                                     <select id="cat" class="form-control" name="cat" required>
                                         <option disabled selected>Choose...</option>
-                                        <option value="PayTM">Food</option>
-                                        <option value="GPay">Health</option>
-                                        <option value="PhonePe">Essentials</option>
-                                        <option value="BHIM">Transportation</option>
+                                        <option value="Food">Food</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Essentials">Essentials</option>
+                                        <option value="Transportation">Transportation</option>
                                         <option value="Education">Education</option>
                                         <option value="Household">Household</option>
                                         <option value="Others">Others</option>
@@ -175,7 +175,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button style="margin-right: -2.5em;" type="submit" class="btn btn-danger" onclick="Javascript:addRow(), close" >Submit</button>
+                            <button style="margin-right: -2.5em;" type="submit" class="btn btn-danger" onclick="close" >Submit</button>
                         </div>
                     </form>
                 </div>
@@ -203,7 +203,100 @@
     </div>
 
     <script>
+        // Navbar Shit
+        var savings = 0;
+        var income = "";
+        var intIncome = 0;
+        fetch("/data2").then(
+            res=>{
+                res.json().then(
+                    data=>{
+                        console.log(data); 
+                        if(data.length > 0) {
+
+                            data.forEach((u)=>{
+                                intIncome += u.income;
+                                income += "<p>"+"<br>"+"Income:"+"<br>"+u.income+"</p>";
+                                savings += u.Savings;
+                            })
+                            document.getElementById("income").innerHTML=income;
+                        } 
+                    }
+                ) 
+            }
+        ) 
         fetch("/data1").then(
+            res=>{
+                res.json().then(
+                    data=>{
+                        console.log(data); 
+                        if(data.length > 0) {
+                            var temp1 = 0;
+                            var temp2 = "";
+
+                            data.forEach((u)=>{
+                                temp1 += u.amount;
+                            })
+                            temp2 = "<p>"+"<br>"+"Expense:"+"<br>"+temp1+"</p>"
+                            document.getElementById("expense").innerHTML=temp2;
+                            var temp3 = intIncome - temp1 - savings;
+                            var total = "<p>"+"<br>"+"Total:"+"<br>"+temp3+"</p>";
+                            document.getElementById("total").innerHTML=total;
+                        } 
+                    }
+                ) 
+            }
+        )
+        fetch("/data").then(
+            res=>{
+                res.json().then(
+                    data=>{
+                        console.log(data); 
+                        if(data.length > 0) {
+                            var temp1 = 0;
+                            var temp2 = "";
+
+                            data.forEach((u)=>{
+                                temp1 += u.amount;
+                            })
+                            temp2 = "<p>"+"<br>"+"Expense:"+"<br>"+temp1+"</p>"
+                            document.getElementById("expense").innerHTML=temp2;
+                            var temp3 = intIncome - temp1 - savings;
+                            var total = "<p>"+"<br>"+"Total:"+"<br>"+temp3+"</p>";
+                            document.getElementById("total").innerHTML=total;
+                        } 
+                    }
+                ) 
+            }
+        )
+
+        // Main Page Shit
+        fetch("/data1").then(
+            res=>{
+                res.json().then(
+                    data=>{
+                        console.log(data); 
+                        if(data.length > 0) {
+                            var temp = "";
+
+                            data.forEach((u)=>{
+                                temp += "<tr>";
+                                temp += "<td>"+"FNNCX2021"+u.transactionID+"</td>";
+                                temp += "<td>"+u.Date+"</td>";
+                                temp += "<td>"+u.time+"</td>";
+                                temp += "<td>"+u.amount+"</td>";
+                                temp += "<td>"+u.category+"</td>";
+                                temp += "<td>"+u.mode_of_transaction+"</td>";
+                                temp += "<td>"+u.comments+"</td>";
+                            })
+                            document.getElementById("data").innerHTML=temp;
+
+                        } 
+                    }
+                ) 
+            }
+        ) 
+        fetch("/data").then(
             res=>{
                 res.json().then(
                     data=>{
@@ -235,7 +328,7 @@
       </svg></a>
     <div id="preloader"></div>
 
-    <script>
+    <!-- <script>
         function addRow() {
             
             var date = document.getElementById("date");
@@ -258,7 +351,7 @@
             row.insertCell(6).innerHTML = comments.value;
         }
 
-    </script>
+    </script> -->
 
     <!-- Vendor JS Files -->
     <script src="/388"></script>
