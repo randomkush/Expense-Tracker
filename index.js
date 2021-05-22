@@ -39,6 +39,9 @@ app.get('/expenseTracker', function(req, res){
 app.get('/bg1', function (req, res) {  
    res.sendFile( __dirname + "/images" + "/pranjul.jpg");  
 })
+app.get('/bg5', function (req, res) {  
+   res.sendFile( __dirname + "/images" + "/statistics-graph-illustration.jpg");  
+})
 app.get('/bg4', function (req, res) {  
    res.sendFile( __dirname + "/images" + "/thbg.jpg");  
 })
@@ -91,6 +94,25 @@ app.get('/48', function (req, res) {
    res.sendFile( __dirname + "/assets" + "/img/apple-touch-icon.png" );  
 })  
 
+// Team Photos
+app.get('/kush', function(req, res){
+   res.sendFile(__dirname + '/images' + '/image0.png')
+})
+app.get('/pranjul', function(req, res){
+   res.sendFile(__dirname + '/images' + '/CHOMU.png')
+})
+app.get('/saloni', function(req, res){
+   res.sendFile(__dirname + '/images' + '/SALONI.png')
+})
+app.get('/mehul', function(req, res){
+   res.sendFile(__dirname + '/images' + '/ME.png')
+})
+app.get('/google', function(req, res){
+   res.sendFile(__dirname + '/images' + '/google.png')
+})
+app.get('/stack', function(req, res){
+   res.sendFile(__dirname + '/images' + '/stack.png')
+})
 
 // BOOTSTRAP JS
 app.get('/388', function (req, res) {     
