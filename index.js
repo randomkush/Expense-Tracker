@@ -39,6 +39,9 @@ app.get('/expenseTracker', function(req, res){
 app.get('/bg1', function (req, res) {  
    res.sendFile( __dirname + "/images" + "/pranjul.jpg");  
 })
+app.get('/bg4', function (req, res) {  
+   res.sendFile( __dirname + "/images" + "/thbg.jpg");  
+})
 app.get('/alert', function(req, res){
    res.sendFile(__dirname + '/images' + '/alert 2.jpeg')
 })
